@@ -26,3 +26,5 @@ export default class Server {
         });
     }
 }
+
+// el resto de carpetas no se suben por que no tiene ningun codigo todavia 
