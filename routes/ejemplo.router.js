@@ -1,10 +1,11 @@
 import { Router } from "express";
+
+import { getEjemplos } from "../controllers/ejemplo.controllers.js";
 const ejemploRouter = Router();
 
-ejemploRouter.get('/', (req, res) => {
-    res.json({ message: 'Hello from ejemplo route!' });
 
-});
+
+ejemploRouter.get('/',getEjemplos );
 
 ejemploRouter.get('/:id', (req, res) => {
     const  id  = req.params.id;
