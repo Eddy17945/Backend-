@@ -1,30 +1,19 @@
 import { Router } from "express";
 
-import { getEjemplos } from "../controllers/ejemplo.controllers.js";
+import { getEjemplos, getEjemplosById, postEjemplo, putEjemplo, deleteEjemplo } from "../controllers/ejemplo.controllers.js";
 const ejemploRouter = Router();
 
 
 
 ejemploRouter.get('/',getEjemplos );
 
-ejemploRouter.get('/:id', (req, res) => {
-    const  id  = req.params.id;
-    res.json({ message: `Hello from ejemplo route with ID`, id  });
-});
+ejemploRouter.get('/:id', getEjemplosById);
 
-ejemploRouter.put('/:id', (req, res) => {
-    const body = req.body;
-    res.json({ message: 'PUT request to ejemplo route', body });
-});
 
-ejemploRouter.post('/', (req, res) => {
-    const body = req.body;
-    res.json({ message: 'POST request to ejemplo route', body });
-});
+ejemploRouter.put('/:id', putEjemplo);
 
-ejemploRouter.delete('/:id', (req, res) => {
-    const  id  = req.params.id;
-    res.json({ message: `DELETE request to ejemplo route with ID`, id  });
-});
+ejemploRouter.post('/',postEjemplo);
+
+ejemploRouter.delete('/:id', deleteEjemplo);
 
 export default ejemploRouter;
