@@ -1,1 +1,204 @@
-<h2>Bienvenido a mi API</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Biblioteca</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Sistema de Gestión de Biblioteca</h1>
+            <p class="subtitle">Administra tu colección de libros de forma fácil y rápida</p>
+        </header>
+
+        <!-- Menú Principal -->
+        <div class="menu-principal" id="menuPrincipal">
+            <div class="menu-grid">
+                <div class="menu-card" onclick="abrirSeccion('agregar')">
+                    <div class="menu-icon">➕</div>
+                    <h2>Agregar Libro</h2>
+                    <p>Registra nuevos libros en la biblioteca</p>
+                </div>
+
+                <div class="menu-card" onclick="abrirSeccion('ver')">
+                    <div class="menu-icon">📖</div>
+                    <h2>Ver Libros</h2>
+                    <p>Consulta todos los libros registrados</p>
+                </div>
+
+                <div class="menu-card" onclick="abrirSeccion('buscar')">
+                    <div class="menu-icon">🔍</div>
+                    <h2>Buscar</h2>
+                    <p>Busca libros por autor o filtros</p>
+                </div>
+
+                <div class="menu-card" onclick="abrirSeccion('disponibles')">
+                    <div class="menu-icon">✅</div>
+                    <h2>Disponibles</h2>
+                    <p>Libros disponibles para préstamo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Agregar Libro -->
+        <div class="seccion" id="seccionAgregar">
+            <div class="seccion-header">
+                <button class="btn-volver" onclick="volverMenu()">⬅️ Volver al Menú</button>
+                <h2>➕ Agregar Nuevo Libro</h2>
+            </div>
+
+            <div class="card">
+                <form id="libroForm">
+                    <input type="hidden" id="libroId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="titulo">Título *</label>
+                            <input type="text" id="titulo" required placeholder="Ej: Cien años de soledad">
+                        </div>
+                        <div class="form-group">
+                            <label for="autor">Autor *</label>
+                            <input type="text" id="autor" required placeholder="Ej: Gabriel García Márquez">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="isbn">ISBN *</label>
+                            <input type="text" id="isbn" required placeholder="Ej: 978-0307474728">
+                        </div>
+                        <div class="form-group">
+                            <label for="editorial">Editorial</label>
+                            <input type="text" id="editorial" placeholder="Ej: Sudamericana">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="anioPublicacion">Año de Publicación *</label>
+                            <input type="number" id="anioPublicacion" min="1000" max="2025" required placeholder="Ej: 1967">
+                        </div>
+                        <div class="form-group">
+                            <label for="genero">Género *</label>
+                            <select id="genero" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="Ficción">Ficción</option>
+                                <option value="No Ficción">No Ficción</option>
+                                <option value="Ciencia">Ciencia</option>
+                                <option value="Historia">Historia</option>
+                                <option value="Biografía">Biografía</option>
+                                <option value="Tecnología">Tecnología</option>
+                                <option value="Arte">Arte</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="copiasTotal">Copias Totales *</label>
+                            <input type="number" id="copiasTotal" min="0" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="copiasDisponibles">Copias Disponibles *</label>
+                            <input type="number" id="copiasDisponibles" min="0" value="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado *</label>
+                        <select id="estado" required>
+                            <option value="Disponible">Disponible</option>
+                            <option value="Prestado">Prestado</option>
+                            <option value="En reparación">En reparación</option>
+                            <option value="Perdido">Perdido</option>
+                        </select>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span id="submitBtnText">Agregar Libro</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;" onclick="cancelarEdicion()">
+                            Cancelar Edición
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sección: Ver Libros -->
+        <div class="seccion" id="seccionVer">
+            <div class="seccion-header">
+                <button class="btn-volver" onclick="volverMenu()">⬅️ Volver al Menú</button>
+                <div class="header-info">
+                    <h2>📖 Todos los Libros</h2>
+                    <span id="totalLibrosVer" class="badge">0 libros</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div id="librosListVer"></div>
+            </div>
+        </div>
+
+        <!-- Sección: Buscar -->
+        <div class="seccion" id="seccionBuscar">
+            <div class="seccion-header">
+                <button class="btn-volver" onclick="volverMenu()">⬅️ Volver al Menú</button>
+                <h2>🔍 Buscar Libros</h2>
+            </div>
+
+            <div class="card">
+                <div class="search-container">
+                    <input type="text" id="searchAutor" placeholder="Escribe el nombre del autor..." class="search-input">
+                    <button class="btn btn-primary" onclick="buscarPorAutor()">
+                        🔍 Buscar
+                    </button>
+                </div>
+
+                <div class="resultados-header">
+                    <h3>Resultados de búsqueda</h3>
+                    <span id="totalLibrosBuscar" class="badge">0 resultados</span>
+                </div>
+                
+                <div id="librosListBuscar"></div>
+            </div>
+        </div>
+
+        <!-- Sección: Disponibles -->
+        <div class="seccion" id="seccionDisponibles">
+            <div class="seccion-header">
+                <button class="btn-volver" onclick="volverMenu()">⬅️ Volver al Menú</button>
+                <div class="header-info">
+                    <h2>✅ Libros Disponibles</h2>
+                    <span id="totalLibrosDisponibles" class="badge">0 disponibles</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div id="librosListDisponibles"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3>⚠️ ¿Estás seguro?</h3>
+            <p id="modal-message"></p>
+            <div class="modal-buttons">
+                <button class="btn btn-danger" id="confirmBtn">Confirmar</button>
+                <button class="btn btn-secondary" id="closeModalBtn" onclick="cerrarModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificaciones -->
+    <div id="notification" class="notification"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
