@@ -7,3 +7,5 @@ const server = new Server();
 server.listen();
 
 console.log('Amo el cafe');
+
+// index.js punto de entrada de la aplicacion

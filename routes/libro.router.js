@@ -21,3 +21,5 @@ libroRouter.put('/:id', putLibro);
 libroRouter.delete('/:id', deleteLibro);
 
 export default libroRouter;
+
+// routes/libro.router.js para definir las rutas de libros

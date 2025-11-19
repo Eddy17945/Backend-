@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// models/libro.model.js para definir el esquema y modelo de libros
 const libroSchema = new mongoose.Schema({
     titulo: { 
         type: String, 

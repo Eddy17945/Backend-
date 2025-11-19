@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';    
 import indexRouter from '../routes/index.routes.js';
 import * as db from '../db/cnn_mongodb.js';
+
+// server/server.js para configurar el servidor Express
 export default class Server {
     constructor() {
         this.app = express();

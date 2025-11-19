@@ -1,6 +1,8 @@
 // URL base de la API
 const API_URL = 'http://localhost:3000/api/libros';
 
+// js/app.js para la logica del frontend de la aplicacion de gestion de libros
+
 // Variables globales
 let editandoLibro = false;
 let libroIdEliminar = null;
