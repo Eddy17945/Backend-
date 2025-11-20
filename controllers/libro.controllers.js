@@ -1,6 +1,6 @@
 import Libro from "../models/libro.model.js";
 import mongoose from "mongoose";
-// controllers/libro.controllers.js para la logica de los endpoints de libros
+// Controllers/libro.controllers.js para la logica de los endpoints de libros
 // Obtener todos los libros
 export const getLibros = async (req, res) => {
     console.log('Obteniendo todos los libros');
