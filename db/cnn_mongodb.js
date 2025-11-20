@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 let isConnected = false; // Track the connection status
-// Función para conectar a MongoDB
+// Función para conectar a  MongoDB
 const conectarAMongoDB = async () => {
   if (isConnected) {
     console.log('Ya estás conectado a MongoDB'.green);
