@@ -7,7 +7,7 @@
 
 //export default indexRouter;
 
-// routes/index.routes.js para definir las rutas principales
+// Routes/index.routes.js para definir las rutas principales
 import ejemploRouter from "./ejemplo.router.js";
 import libroRouter from "./libro.router.js";
 import { Router } from "express";
